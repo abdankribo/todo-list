@@ -1,0 +1,7 @@
+const form=document.querySelector("#form"),input=document.querySelector("#input"),list=document.querySelector("#list"),count=document.querySelector("#count"),clear=document.querySelector("#clear");
+let todos=JSON.parse(localStorage.getItem("todos")||"[]"),filter="all";
+function save(){localStorage.setItem("todos",JSON.stringify(todos))}
+function render(){list.innerHTML="";const shown=todos.filter(t=>filter==="all"||filter==="active"&&!t.done||filter==="completed"&&t.done);shown.forEach(t=>{const li=document.createElement("li");li.className=t.done?"done":"";li.innerHTML='<label><input type="checkbox" '+(t.done?"checked":"")+'><span></span></label><button class="delete" aria-label="Hapus">×</button>';li.querySelector("span").textContent=t.text;li.querySelector("input").onchange=()=>{t.done=!t.done;save();render()};li.querySelector(".delete").onclick=()=>{todos=todos.filter(x=>x.id!==t.id);save();render()};list.appendChild(li)});const active=todos.filter(t=>!t.done).length;count.textContent=active+" tugas aktif"}
+form.onsubmit=e=>{e.preventDefault();const text=input.value.trim();if(!text)return;todos.unshift({id:Date.now(),text,done:false});input.value="";save();render();input.focus()};
+document.querySelectorAll(".filter").forEach(b=>b.onclick=()=>{filter=b.dataset.filter;document.querySelectorAll(".filter").forEach(x=>x.classList.remove("active"));b.classList.add("active");render()});
+clear.onclick=()=>{todos=todos.filter(t=>!t.done);save();render()};render();
