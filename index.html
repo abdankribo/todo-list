@@ -1,0 +1,15 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Todo List</title><link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main class="app">
+  <header><p class="eyebrow">PRODUCTIVITY</p><h1>Todo List</h1><p>Kelola tugas harian dengan sederhana.</p></header>
+  <form id="form" class="add"><input id="input" placeholder="Tambahkan tugas..." autocomplete="off"><button>Tambah</button></form>
+  <div class="toolbar"><div class="filters"><button class="filter active" data-filter="all">Semua</button><button class="filter" data-filter="active">Aktif</button><button class="filter" data-filter="completed">Selesai</button></div><span id="count">0 tugas</span></div>
+  <ul id="list"></ul><button id="clear" class="clear">Hapus tugas selesai</button>
+</main>
+<script src="script.js"></script>
+</body></html>
